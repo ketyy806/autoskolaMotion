@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&amp;family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#14130f;color:#f2efe6;font-family:'Public Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+::selection{background:#ee6a1f;color:#14130f}
+@keyframes logoShine{0%{left:-75%}55%{left:130%}100%{left:130%}}
+@keyframes heroZoom{0%{transform:scale(1)}100%{transform:scale(1.035)}}
+@keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes aboutShine{0%{left:-60%}45%{left:120%}100%{left:120%}}
+@keyframes phonePulse{0%{box-shadow:0 0 0 0 rgba(238,106,31,.5)}70%{box-shadow:0 0 0 10px rgba(238,106,31,0)}100%{box-shadow:0 0 0 0 rgba(238,106,31,0)}}
+@keyframes titleShine{0%{background-position:120% center}60%,100%{background-position:-20% center}}
+@keyframes floatBox{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes statMarquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.upis-card{transition:transform .28s ease,background-color .28s ease,border-color .28s ease,box-shadow .28s ease;cursor:pointer}
+.upis-card:hover{background:#ee6a1f;border-color:#ee6a1f !important;transform:scale(1.05);box-shadow:0 22px 48px rgba(0,0,0,.5)}
+.upis-card:hover .u-num,.upis-card:hover .u-title,.upis-card:hover .u-text{color:#14130f !important}
+.upis-card:hover .u-num{opacity:1 !important}
+@keyframes lineFill{0%{width:0}70%{width:85.8%}100%{width:85.8%}}
+@keyframes stepPulse{0%{box-shadow:0 0 0 0 rgba(238,106,31,.55);transform:scale(1)}12%{box-shadow:0 0 0 12px rgba(238,106,31,0);transform:scale(1.14)}26%,100%{box-shadow:0 0 0 0 rgba(238,106,31,0);transform:scale(1)}}
+input,textarea,select{font-family:inherit}
+@media (max-width:640px){
+  [style*="grid-template-columns"]{grid-template-columns:1fr !important}
+  h1{font-size:32px !important;line-height:1.1 !important}
+  h2{font-size:26px !important}
+  #topnav{padding:12px 16px !important}
+  #navlinks{display:none !important}
+  #navright{display:none !important}
+  #hamburger{display:flex !important}
+  #mobilemenu[data-menu="open"]{display:flex !important}
+  #pocetna > div{padding:36px 20px !important}
+  #pocetna img{height:auto !important;max-height:230px !important;object-fit:contain !important}
+  #pocetna a[href="#upis"],#pocetna a[href="#kategorije"]{font-size:12.5px !important;padding:12px 14px !important}
+  #statstrip{flex-wrap:nowrap !important}
+  #statstrip > div{padding:16px 8px !important;gap:6px !important;flex-direction:column;align-items:center;text-align:center}
+  #statstrip > div > span:first-child{font-size:22px !important}
+  #statstrip > div > span:last-child{font-size:10px !important;text-align:center}
+  #o-nama > div{padding:32px 20px !important}
+  #o-nama > div:nth-child(1){order:2}
+  #o-nama > div:nth-child(2){order:1}
+  #kategorije,#upis,#instruktori,#utisci,#faq,#galerija,#zasto,#kontakt{padding-left:20px !important;padding-right:20px !important;padding-top:52px !important;padding-bottom:52px !important}
+  #kategorije [style*="17px"]{font-size:20px !important}
+  #kategorije [style*="min-height:40px"]{font-size:15px !important;min-height:0 !important}
+  #kategorije [style*="space-between"][style*="flex-end"]{flex-direction:column !important;align-items:flex-start !important;gap:16px !important}
+  #kontakt img[alt^="Lokacija"]{min-height:260px !important}
+  #journey-line-fill{display:none !important}
+  #journey-line-bg{display:none !important}
+  #journey-steps{gap:30px !important}
+  #journey-steps > div{text-align:center !important}
+}
+</style>
+</helmet>
+
+<div ref="{{ rootRef }}" style="width:100%;background:#14130f">
+
+<!-- NAV -->
+<div id="topnav" style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 44px;background:rgba(20,19,15,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(242,239,230,.08)">
+  <a href="#pocetna" style="display:flex;align-items:center;gap:13px">
+    <span style="position:relative;display:inline-block;overflow:hidden;border-radius:6px" style-after="content:'';position:absolute;top:0;left:-75%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-22deg);animation:logoShine 4s ease-in-out infinite;pointer-events:none">
+      <img src="uploads/logo.png" alt="Auto škola Motion Temerin" style="height:50px;width:auto;display:block">
+    </span>
+  </a>
+  <div id="navlinks" style="display:flex;align-items:center;gap:19px;font-size:13.5px;white-space:nowrap;color:#cfc9bb">
+    <a href="#kategorije" style-hover="color:#ee6a1f">{{ t.nav_categories }}</a>
+    <a href="#o-nama" style-hover="color:#ee6a1f">{{ t.nav_about }}</a>
+    <a href="#upis" style-hover="color:#ee6a1f">{{ t.nav_enroll }}</a>
+    <a href="#instruktori" style-hover="color:#ee6a1f">{{ t.nav_instructors }}</a>
+    <a href="#galerija" style-hover="color:#ee6a1f">{{ t.nav_gallery }}</a>
+    <a href="#zasto" style-hover="color:#ee6a1f">{{ t.nav_why }}</a>
+    <a href="#kontakt" style-hover="color:#ee6a1f">{{ t.nav_contact }}</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:16px">
+    <div id="navright" style="display:flex;align-items:center;gap:16px">
+    <div style="display:flex;font-size:12px;border:1px solid rgba(242,239,230,.18);border-radius:999px;overflow:hidden">
+      <span onClick="{{ setSr }}" style="{{ srStyle }}">SR</span>
+      <span onClick="{{ setEn }}" style="{{ enStyle }}">EN</span>
+    </div>
+    <a href="tel:062-151-00-28" style="white-space:nowrap;padding:10px 18px;border:1px solid #ee6a1f;color:#ee6a1f;border-radius:999px;font-size:13px;font-weight:600;animation:phonePulse 2.4s ease-in-out infinite" style-hover="background:#ee6a1f;color:#14130f">062-151-00-28</a>
+    </div>
+    <div id="hamburger" onClick="{{ toggleMenu }}" style="display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;border:1px solid rgba(242,239,230,.2);border-radius:10px;cursor:pointer;align-items:center">
+      <span style="{{ ham1 }}"></span>
+      <span style="{{ ham2 }}"></span>
+      <span style="{{ ham3 }}"></span>
+    </div>
+  </div>
+
+  <div id="mobilemenu" data-menu="{{ menuState }}" style="display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:2px;padding:14px 18px 20px;background:rgba(16,15,12,.98);backdrop-filter:blur(14px);border-bottom:1px solid rgba(242,239,230,.1);box-shadow:0 22px 40px rgba(0,0,0,.5)">
+    <a href="#kategorije" onClick="{{ closeMenu }}" style="padding:14px 6px;font-size:16px;color:#f2efe6;border-bottom:1px solid rgba(242,239,230,.07)" style-hover="color:#ee6a1f">{{ t.nav_categories }}</a>
+    <a href="#o-nama" onClick="{{ closeMenu }}" style="padding:14px 6px;font-size:16px;color:#f2efe6;border-bottom:1px solid rgba(242,239,230,.07)" style-hover="color:#ee6a1f">{{ t.nav_about }}</a>
+    <a href="#upis" onClick="{{ closeMenu }}" style="padding:14px 6px;font-size:16px;color:#f2efe6;border-bottom:1px solid rgba(242,239,230,.07)" style-hover="color:#ee6a1f">{{ t.nav_enroll }}</a>
+    <a href="#instruktori" onClick="{{ closeMenu }}" style="padding:14px 6px;font-size:16px;color:#f2efe6;border-bottom:1px solid rgba(242,239,230,.07)" style-hover="color:#ee6a1f">{{ t.nav_instructors }}</a>
+    <a href="#galerija" onClick="{{ closeMenu }}" style="padding:14px 6px;font-size:16px;color:#f2efe6;border-bottom:1px solid rgba(242,239,230,.07)" style-hover="color:#ee6a1f">{{ t.nav_gallery }}</a>
+    <a href="#zasto" onClick="{{ closeMenu }}" style="padding:14px 6px;font-size:16px;color:#f2efe6;border-bottom:1px solid rgba(242,239,230,.07)" style-hover="color:#ee6a1f">{{ t.nav_why }}</a>
+    <a href="#kontakt" onClick="{{ closeMenu }}" style="padding:14px 6px;font-size:16px;color:#f2efe6;border-bottom:1px solid rgba(242,239,230,.07)" style-hover="color:#ee6a1f">{{ t.nav_contact }}</a>
+    <div style="display:flex;align-items:center;gap:14px;margin-top:16px">
+      <div style="display:flex;font-size:13px;border:1px solid rgba(242,239,230,.18);border-radius:999px;overflow:hidden">
+        <span onClick="{{ setSr }}" style="{{ srStyle }}">SR</span>
+        <span onClick="{{ setEn }}" style="{{ enStyle }}">EN</span>
+      </div>
+      <a href="tel:062-151-00-28" style="flex:1;text-align:center;padding:12px 18px;background:#ee6a1f;color:#14130f;border-radius:999px;font-size:14px;font-weight:700">062-151-00-28</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div id="pocetna" style="display:grid;grid-template-columns:1.05fr .95fr;background:#14130f">
+  <div style="padding:100px 44px 96px;align-self:center">
+    <h1 style="font-family: 'Spectral',serif; font-weight: 600; font-size: 50px; line-height: 1.04; margin: 0 0 22px; letter-spacing: -.01em;background:linear-gradient(100deg,#f2efe6 0%,#f2efe6 42%,#ee6a1f 50%,#f2efe6 58%,#f2efe6 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:titleShine 5s ease-in-out infinite">{{ t.hero_title }}</h1>
+    <p style="font-size:18px;line-height:1.6;color:#c3bdae;max-width:480px;margin:0 0 36px">{{ t.hero_sub }}</p>
+    <div style="display:flex;gap:14px">
+      <a href="#upis" style="padding:15px 28px;background:#ee6a1f;color:#14130f;border-radius:8px;font-weight:700;font-size:15px;transition:transform .25s ease,box-shadow .25s ease,background .25s ease" style-hover="background:#ff7d33;transform:translateY(-3px);box-shadow:0 14px 30px rgba(238,106,31,.4)">{{ t.hero_cta1 }}</a>
+      <a href="#kategorije" style="padding:15px 28px;border:1px solid rgba(242,239,230,.25);color:#f2efe6;border-radius:8px;font-weight:600;font-size:15px;transition:transform .25s ease,border-color .25s ease,background .25s ease" style-hover="border-color:#ee6a1f;background:rgba(238,106,31,.08);transform:translateY(-3px)">{{ t.hero_cta2 }}</a>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:flex-end;padding:44px 47px 44px 12px">
+    <div style="position:relative;width:100%;max-width:540px;border-radius:18px;overflow:hidden;border:1px solid rgba(238,106,31,.35);box-shadow:0 26px 60px rgba(0,0,0,.55),0 0 0 6px rgba(238,106,31,.06);animation:heroFloat 6s ease-in-out infinite">
+      <img src="uploads/glavna.png" alt="Auto škola Motion — objekat u Temerinu" style="display:block;width:100%;height:400px;object-fit:cover;object-position:center 16%">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,19,15,.05) 0%,rgba(20,19,15,.35) 100%)"></div>
+    </div>
+  </div>
+</div>
+
+<!-- STATISTIKA TRAKA -->
+<div style="overflow:hidden;background:#ee6a1f;border-top:1px solid rgba(20,19,15,.25);border-bottom:1px solid rgba(20,19,15,.25)">
+  <div id="statstrip" style="display:flex;justify-content:center;flex-wrap:wrap;width:100%">
+    <sc-for list="{{ marqueeItems }}" as="m" hint-placeholder-count="3">
+      <div style="display:flex;align-items:baseline;gap:12px;padding:22px 40px;white-space:nowrap">
+        <span style="font-family:'Spectral',serif;font-size:34px;color:#14130f;line-height:1">{{ m.value }}</span>
+        <span style="font-size:13px;color:#5a3512;letter-spacing:.04em;font-weight:600">{{ m.label }}</span>
+      </div>
+    </sc-for>
+  </div>
+</div>
+
+<!-- KATEGORIJE / CENOVNIK -->
+<div id="kategorije" style="padding:80px 44px;border-top:1px solid rgba(242,239,230,.08)">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px">
+    <div>
+      <div style="font-size:12px;letter-spacing:.18em;color:#ee6a1f;margin-bottom:12px">{{ t.kick_categories }}</div>
+      <h2 style="font-family:'Spectral',serif;font-weight:600;font-size:42px;margin:0;letter-spacing:-.01em">{{ t.categories_title }}</h2>
+    </div>
+    <p style="max-width:360px;font-size:14px;color:#a8a291;line-height:1.6;margin:0">{{ t.categories_note }}</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px">
+    <sc-for list="{{ categories }}" as="c" hint-placeholder-count="4">
+      <div style="{{ c.cardStyle }}" style-hover="transform:translateY(-8px) scale(1.02);border-color:#ee6a1f;box-shadow:0 22px 50px rgba(0,0,0,.5),0 0 0 1px rgba(238,106,31,.35);background:rgba(238,106,31,.09)">
+        <sc-if value="{{ c.popular }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:6px 16px;background:#ee6a1f;color:#14130f;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 6px 16px rgba(238,106,31,.35)">{{ t.popular_badge }}</div>
+        </sc-if>
+        <div style="font-family:'Spectral',serif;font-size:44px;color:#ee6a1f;line-height:1">{{ c.code }}</div>
+        <div style="font-weight:700;margin:12px 0 4px;font-size:17px">{{ c.name }}</div>
+        <div style="font-size:13px;color:#a8a291;line-height:1.5;min-height:40px">{{ c.desc }}</div>
+        <div style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(242,239,230,.1);display:flex;justify-content:space-between;align-items:baseline">
+          <span style="font-size:12px;color:#a8a291">{{ t.price_from }}</span>
+          <span style="font-family:'Spectral',serif;font-size:22px;color:#f2efe6">{{ c.price }}</span>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <p style="font-size: 14px; color: #7c766a; margin-top: 20px">{{ t.price_disclaimer }}</p>
+</div>
+
+<!-- O NAMA -->
+<div id="o-nama" style="display:grid;grid-template-columns:.9fr 1.1fr;gap:0;border-top:1px solid rgba(242,239,230,.08)">
+  <div style="display:flex;align-items:center;padding:56px 24px 56px 44px">
+    <div style="position:relative;width:100%;border-radius:16px;overflow:hidden;border:1px solid rgba(238,106,31,.25);box-shadow:0 20px 50px rgba(0,0,0,.5);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-8px);box-shadow:0 30px 64px rgba(0,0,0,.6)">
+      <img src="uploads/tiiim.png" alt="Tim auto škole Motion" style="display:block;width:100%;height:auto">
+      <div style="position:absolute;top:0;left:-60%;width:38%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);transform:skewX(-20deg);animation:aboutShine 5.5s ease-in-out infinite;pointer-events:none"></div>
+    </div>
+  </div>
+  <div style="padding:80px 44px">
+    <div style="font-size: 15px; letter-spacing: .18em; color: #ee6a1f; margin-bottom: 12px">{{ t.kick_about }}</div>
+    <h2 style="font-family: 'Spectral',serif; font-weight: 600; font-size: 42px; margin: 0 0 22px; letter-spacing: -.01em; text-align: justify">{{ t.about_title }}</h2>
+    <p style="font-size: 16px; line-height: 1.7; color: #c3bdae; margin: 0 0 18px; text-align: justify">{{ t.about_p1 }}</p>
+    <p style="font-size: 16px; line-height: 1.7; color: #c3bdae; margin: 0 0 30px; text-align: justify">{{ t.about_p2 }}</p>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">
+      <sc-for list="{{ aboutPoints }}" as="p" hint-placeholder-count="4">
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="width:8px;height:8px;border-radius:2px;background:#ee6a1f;margin-top:7px;flex:none"></div>
+          <div style="font-size:14px;color:#e8e3d6;line-height:1.5">{{ p.text }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+
+<!-- KAKO SE UPISATI -->
+<div id="upis" style="padding:80px 44px;border-top:1px solid rgba(242,239,230,.08);background:#100f0c">
+  <div style="text-align:center;margin-bottom:48px">
+    <div style="font-size: 15px; letter-spacing: .18em; color: #ee6a1f; margin-bottom: 12px">{{ t.kick_enroll }}</div>
+    <h2 style="font-family:'Spectral',serif;font-weight:600;font-size:42px;margin:0;letter-spacing:-.01em">{{ t.enroll_title }}</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1000px;margin:0 auto">
+    <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+      <div class="upis-card" style="padding:32px 28px;border:1px solid rgba(242,239,230,.1);border-radius:14px">
+        <div class="u-num" style="font-family:'Spectral',serif;font-size:48px;color:#ee6a1f;line-height:1;opacity:.9">{{ s.n }}</div>
+        <div class="u-title" style="font-weight:700;font-size:19px;margin:16px 0 8px">{{ s.title }}</div>
+        <div class="u-text" style="font-size:14px;color:#a8a291;line-height:1.6">{{ s.text }}</div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="text-align:center;margin-top:40px">
+    <a href="#kontakt" style="display:inline-block;padding:15px 34px;background:#ee6a1f;color:#14130f;border-radius:8px;font-weight:700;font-size:15px" style-hover="background:#ff7d33">{{ t.enroll_cta }}</a>
+  </div>
+</div>
+
+<!-- PUT DO VOZAČKE DOZVOLE -->
+<div id="put" style="padding:80px 44px;border-top:1px solid rgba(242,239,230,.08)">
+  <div style="text-align:center;margin-bottom:58px">
+    <div style="font-size: 15px; letter-spacing: .18em; color: #ee6a1f; margin-bottom: 12px">{{ t.kick_journey }}</div>
+    <h2 style="font-family:'Spectral',serif;font-weight:600;font-size:42px;margin:0;letter-spacing:-.01em">{{ t.journey_title }}</h2>
+  </div>
+  <div style="position:relative;max-width:1080px;margin:0 auto">
+    <div id="journey-line-bg" style="position:absolute;top:28px;left:7.1%;right:7.1%;height:3px;background:rgba(238,106,31,.18);border-radius:2px"></div>
+    <div id="journey-line-fill" style="position:absolute;top:28px;left:7.1%;width:0;height:3px;background:#ee6a1f;border-radius:2px;animation:lineFill 3.85s ease-in-out infinite"></div>
+    <div id="journey-steps" style="position:relative;display:grid;grid-template-columns:repeat(7,1fr);gap:8px">
+      <sc-for list="{{ journey }}" as="j" hint-placeholder-count="7">
+        <div style="text-align:center">
+          <div style="{{ j.circleStyle }}">{{ j.n }}</div>
+          <div style="font-weight:700;font-size:15px;margin:16px 0 6px">{{ j.title }}</div>
+          <div style="font-size:12.5px;color:#a8a291;line-height:1.5">{{ j.text }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+
+<!-- INSTRUKTORI -->
+<div id="instruktori" style="padding:80px 44px;border-top:1px solid rgba(242,239,230,.08)">
+  <div style="margin-bottom:40px">
+    <div style="font-size: 15px; letter-spacing: .18em; color: #ee6a1f; margin-bottom: 12px">{{ t.kick_instructors }}</div>
+    <h2 style="font-family:'Spectral',serif;font-weight:600;font-size:42px;margin:0;letter-spacing:-.01em">{{ t.instructors_title }}</h2>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:24px;justify-content:center">
+    <sc-for list="{{ instructors }}" as="i" hint-placeholder-count="5">
+      <div style="width:260px">
+        <div style="position:relative;height:250px;border-radius:12px;overflow:hidden;margin-bottom:16px;border:1px solid rgba(242,239,230,.08);background:#0e0d0a;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease" style-hover="transform:translateY(-8px);border-color:rgba(238,106,31,.55);box-shadow:0 20px 44px rgba(0,0,0,.5)">
+          <img src="{{ i.img }}" alt="{{ i.name }}" style="{{ i.imgStyle }}">
+        </div>
+        <div style="font-weight:700;font-size:16px">{{ i.name }}</div>
+        <div style="font-size:13px;color:#ee6a1f;margin:3px 0 6px">{{ i.role }}</div>
+        <div style="font-size:13px;color:#a8a291">{{ i.exp }}</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+
+<!-- UTISCI KANDIDATA -->
+<div id="utisci" style="padding:80px 44px;border-top:1px solid rgba(242,239,230,.08)">
+  <div style="text-align:center;margin-bottom:48px">
+    <div style="font-size: 15px; letter-spacing: .18em; color: #ee6a1f; margin-bottom: 12px">{{ t.kick_reviews }}</div>
+    <h2 style="font-family:'Spectral',serif;font-weight:600;font-size:42px;margin:0;letter-spacing:-.01em">{{ t.reviews_title }}</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1080px;margin:0 auto">
+    <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+      <div style="padding:30px 28px;border:1px solid rgba(242,239,230,.1);border-radius:14px;display:flex;flex-direction:column;gap:18px;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease,background .3s ease;cursor:default" style-hover="transform:translateY(-6px);border-color:rgba(238,106,31,.5);box-shadow:0 16px 40px rgba(0,0,0,.4);background:rgba(238,106,31,.04)">
+        <div style="color:#ee6a1f;font-size:16px;letter-spacing:3px">★★★★★</div>
+        <p style="font-family:'Spectral',serif;font-size:18px;line-height:1.55;color:#f2efe6;margin:0;flex:1">“{{ r.quote }}”</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:6px;border-top:1px solid rgba(242,239,230,.1)">
+          <div style="width:38px;height:38px;border-radius:50%;background:rgba(238,106,31,.15);color:#ee6a1f;display:flex;align-items:center;justify-content:center;font-weight:700">{{ r.initial }}</div>
+          <div><div style="font-weight:700;font-size:14px">{{ r.name }}</div><div style="font-size:12px;color:#a8a291">{{ r.cat }}</div></div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="text-align:center;margin-top:40px">
+    <a href="utisci-kandidata.html" style="display:inline-flex;align-items:center;gap:10px;padding:14px 26px;background:#ee6a1f;color:#14130f;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none">{{ t.reviews_cta }} →</a>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div id="faq" style="padding:80px 44px;border-top:1px solid rgba(242,239,230,.08)">
+  <div style="text-align:center;margin-bottom:48px">
+    <div style="font-size: 15px; letter-spacing: .18em; color: #ee6a1f; margin-bottom: 12px">{{ t.kick_faq }}</div>
+    
+  </div>
+  <div style="max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start">
+    <sc-for list="{{ faq }}" as="f" hint-placeholder-count="4">
+      <div onClick="{{ f.toggle }}" style="{{ f.cardStyle }}">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px">
+          <span style="font-family:'Spectral',serif;font-size:19px;font-weight:600;color:#f2efe6">{{ f.q }}</span>
+          <span style="{{ f.iconStyle }}">+</span>
+        </div>
+        <div style="{{ f.answerStyle }}">
+          <p style="margin:14px 0 0;font-size:15px;line-height:1.6;color:#c3bdae">{{ f.a }}</p>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+
+<!-- GALERIJA -->
+<div id="galerija" style="padding:80px 44px;border-top:1px solid rgba(242,239,230,.08);background:#100f0c">
+  <div style="margin-bottom:40px">
+    <div style="font-size: 15px; letter-spacing: .18em; color: #ee6a1f; margin-bottom: 12px">{{ t.kick_gallery }}</div>
+    <h2 style="font-family:'Spectral',serif;font-weight:600;font-size:42px;margin:0;letter-spacing:-.01em">{{ t.gallery_title }}</h2>
+  </div>
+  <div style="max-width:680px;margin:0 auto;position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(242,239,230,.1);box-shadow:0 26px 60px rgba(0,0,0,.45);aspect-ratio:16/9;background:#0c0b08">
+    <sc-for list="{{ slides }}" as="s" hint-placeholder-count="7">
+      <img src="{{ s.src }}" alt="Auto škola Motion — galerija" style="{{ s.style }}">
+    </sc-for>
+    <div style="position:absolute;left:0;right:0;bottom:16px;display:flex;justify-content:center;gap:10px;z-index:2">
+      <sc-for list="{{ slides }}" as="s" hint-placeholder-count="7">
+        <div onClick="{{ s.go }}" style="{{ s.dotStyle }}"></div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+
+<!-- ZAŠTO BAŠ MI -->
+<div id="zasto" style="padding:80px 44px;border-top:1px solid rgba(242,239,230,.08)">
+  <div style="text-align:center;margin-bottom:48px">
+    <div style="font-size: 15px; letter-spacing: .18em; color: #ee6a1f; margin-bottom: 12px">{{ t.kick_why }}</div>
+    <h2 style="font-family:'Spectral',serif;font-weight:600;font-size:42px;margin:0;letter-spacing:-.01em">{{ t.why_title }}</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px;max-width:1080px;margin:0 auto">
+    <sc-for list="{{ why }}" as="w" hint-placeholder-count="4">
+      <div style="padding:32px 26px;border:1px solid rgba(242,239,230,.1);border-radius:14px;display:flex;flex-direction:column;gap:14px;text-align:center;align-items:center;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease,background .3s ease" style-hover="transform:translateY(-6px);border-color:rgba(238,106,31,.5);box-shadow:0 16px 40px rgba(0,0,0,.4);background:rgba(238,106,31,.04)">
+        <div style="width:64px;height:64px;border-radius:50%;background:rgba(238,106,31,.12);display:flex;align-items:center;justify-content:center;font-size:30px">{{ w.icon }}</div>
+        <div style="font-family:'Spectral',serif;font-weight:600;font-size:20px;color:#f2efe6">{{ w.title }}</div>
+        <p style="margin:0;font-size:14px;line-height:1.6;color:#a8a291">{{ w.text }}</p>
+      </div>
+    </sc-for>
+  </div>
+</div>
+
+<!-- KONTAKT -->
+<div id="kontakt" style="padding:80px 44px;border-top:1px solid rgba(242,239,230,.08)">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;max-width:1100px;margin:0 auto">
+    <div>
+      <div style="font-size: 15px; letter-spacing: .18em; color: #ee6a1f; margin-bottom: 12px">{{ t.kick_contact }}</div>
+      <h2 style="font-family:'Spectral',serif;font-weight:600;font-size:42px;margin:0 0 24px;letter-spacing:-.01em">{{ t.contact_title }}</h2>
+      
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <sc-for list="{{ contactInfo }}" as="c" hint-placeholder-count="4">
+          <div>
+            <div style="font-size:12px;letter-spacing:.1em;color:#a8a291;margin-bottom:3px">{{ c.label }}</div>
+            <div style="font-size:16px;color:#f2efe6">{{ c.value }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div onClick="{{ openMap }}" style="border:1px solid rgba(242,239,230,.1);border-radius:16px;overflow:hidden;background:#100f0c;min-height:420px;display:flex;cursor:zoom-in">
+      <img src="uploads/mapa.png" alt="Lokacija — Auto škola Motion, Temerin" style="width:100%;height:100%;object-fit:cover;display:block">
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="padding:44px;border-top:1px solid rgba(242,239,230,.08);background:#100f0c;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px">
+  <div style="display:flex;align-items:center;gap:13px">
+    <img src="uploads/logo.png" alt="Auto škola Motion Temerin" style="height:46px;width:auto;display:block">
+  </div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" style="width:42px;height:42px;border-radius:11px;border:1px solid rgba(242,239,230,.14);display:flex;align-items:center;justify-content:center;color:#cfc9bb;transition:background .25s ease,color .25s ease,border-color .25s ease" style-hover="background:#ee6a1f;color:#14130f;border-color:#ee6a1f">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"></circle></svg>
+    </a>
+    <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" style="width:42px;height:42px;border-radius:11px;border:1px solid rgba(242,239,230,.14);display:flex;align-items:center;justify-content:center;color:#cfc9bb;transition:background .25s ease,color .25s ease,border-color .25s ease" style-hover="background:#ee6a1f;color:#14130f;border-color:#ee6a1f">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-1.66 0-3 1.34-3 3v2H8v3h3v6h3v-6h2.5l.5-3H14V9c0-.55.45-1 1-1z"></path></svg>
+    </a>
+    <a href="tel:+062/255-15-75" aria-label="Telefon" style="width:42px;height:42px;border-radius:11px;border:1px solid rgba(242,239,230,.14);display:flex;align-items:center;justify-content:center;color:#cfc9bb;transition:background .25s ease,color .25s ease,border-color .25s ease" style-hover="background:#ee6a1f;color:#14130f;border-color:#ee6a1f">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+    </a>
+  </div>
+  <div style="font-size:13px;color:#7c766a">{{ t.footer_copy }}</div>
+</div>
+
+<sc-if value="{{ floatShow }}" hint-placeholder-val="{{ true }}">
+  <div style="position:fixed;right:24px;bottom:92px;z-index:900;display:flex;align-items:center;gap:14px;padding:16px 18px;max-width:340px;background:linear-gradient(150deg,#1c1a14,#100f0c);border:1px solid rgba(238,106,31,.4);border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.55);animation:floatBox 4s ease-in-out infinite">
+    <div style="flex:none;width:46px;height:46px;border-radius:50%;background:#ee6a1f;color:#14130f;display:flex;align-items:center;justify-content:center;animation:phonePulse 2.4s ease-in-out infinite">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+    </div>
+    <div style="flex:1;min-width:0">
+      <div style="font-weight:700;font-size:14px;color:#f2efe6;margin-bottom:3px">{{ t.float_title }}</div>
+      <a href="tel:062-151-00-28" style="font-size:15px;font-weight:700;color:#ee6a1f" style-hover="color:#ff7d33">062-151-00-28</a>
+    </div>
+    <div onClick="{{ closeFloat }}" style="flex:none;width:26px;height:26px;border-radius:50%;background:rgba(242,239,230,.1);color:#cfc9bb;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer" style-hover="background:#ee6a1f;color:#14130f">×</div>
+  </div>
+</sc-if>
+
+<a href="#pocetna" aria-label="Nazad na vrh" style="position:fixed;right:24px;bottom:24px;z-index:901;width:48px;height:48px;border-radius:50%;background:#ee6a1f;color:#14130f;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px rgba(0,0,0,.45);transition:transform .25s ease,background .25s ease" style-hover="transform:translateY(-4px);background:#ff7d33">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg>
+</a>
+
+<sc-if value="{{ mapOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeMap }}" style="position:fixed;inset:0;z-index:9999;background:rgba(12,11,8,.92);display:flex;align-items:center;justify-content:center;padding:40px;cursor:zoom-out">
+    <img src="uploads/mapa.png" alt="Lokacija — Auto škola Motion, Temerin" style="max-width:95%;max-height:95%;object-fit:contain;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.6)">
+    <div onClick="{{ closeMap }}" style="position:absolute;top:24px;right:28px;width:44px;height:44px;border-radius:50%;background:rgba(242,239,230,.12);color:#f2efe6;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer" style-hover="background:#ee6a1f;color:#14130f">×</div>
+  </div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const DICT = {
+  sr: {
+    nav_about:"O nama", nav_categories:"Kategorije", nav_enroll:"Upis", nav_instructors:"Instruktori", nav_gallery:"Galerija", nav_contact:"Kontakt", nav_why:"Zašto baš mi",
+    hero_title:"Do vozačke dozvole, bez stresa i žurbe",
+    hero_sub:"Iskusni instruktori, savremena vozila i jasan plan obuke u srcu Temerina. Vozi mirno — mi pratimo svaki korak.",
+    hero_cta1:"Prijavi se za upis", hero_cta2:"Pogledaj cenovnik",
+    stat1:"godina iskustva", stat2:"položenih vozača", stat3:"prolaznost",
+    kick_categories:"KATEGORIJE I CENE", categories_title:"Izaberi svoju kategoriju",
+    categories_note:"Kompletna teorijska i praktična obuka. Termini prilagođeni tvom rasporedu.",
+    popular_badge:"Najpopularniji izbor",
+    float_title:"Spreman za upis? Pozovi nas!",
+    price_from:"od", price_disclaimer:"*  Mogućnost plaćanja na rate.",
+    kick_about:"O NAMA", about_title:"Škola kojoj Temerin veruje već 18 godina",
+    about_p1:"Auto škola Motion posluje u Temerinu od 2008. godine. Kroz našu obuku prošlo je više od 3.500 vozača koji danas sigurno voze na putevima.",
+    about_p2:"Verujemo da se dobar vozač stvara mirnom, strpljivom obukom — bez pritiska i sa punom podrškom od prvog do poslednjeg časa.",
+    kick_enroll:"KAKO SE UPISATI", enroll_title:"Tri koraka do vozačke", enroll_cta:"Zakaži besplatan razgovor",
+    kick_instructors:"NAŠ TIM", instructors_title:"Instruktori koji ti daju sigurnost",
+    kick_gallery:"GALERIJA", gallery_title:"Naša škola i vozni park",
+    kick_why:"ZAŠTO BAŠ MI", why_title:"Zašto baš mi",
+    whyItems:[
+      {icon:"🚗", title:"Moderna vozila", text:"Na raspolaganju su nova, redovno servisirana vozila sa kompletnom opremom koja omogućavaju sigurnu i prijatnu obuku."},
+      {icon:"👨‍🏫", title:"Iskusni instruktori", text:"Naši licencirani instruktori imaju dugogodišnje iskustvo i individualan pristup svakom kandidatu."},
+      {icon:"📅", title:"Fleksibilni termini", text:"Časove možete zakazati u skladu sa svojim obavezama."},
+      {icon:"🏆", title:"Visoka prolaznost", text:"Veliki procenat naših kandidata uspešno polaže ispit već iz prvog pokušaja."}
+    ],
+    kick_contact:"KONTAKT", contact_title:"Javi se i kreni već ove nedelje",
+    contact_sub:"Popuni formu ili nas pozovi — odgovaramo brzo i rado objasnimo sve oko upisa i cena.",
+    form_name:"Ime i prezime", form_name_ph:"Tvoje ime", form_phone:"Telefon", form_category:"Kategorija",
+    form_message:"Poruka", form_message_ph:"Kada bi želeo/la da počneš?", form_submit:"Pošalji prijavu",
+    footer_copy:"© 2026 Auto škola Motion, Temerin. Sva prava zadržana.",
+    nav_journey:"Put do dozvole", kick_journey:"KORAK PO KORAK", journey_title:"Put do vozačke dozvole",
+    kick_reviews:"UTISCI KANDIDATA", reviews_title:"Šta kažu naši polaznici", reviews_cta:"Utisci kandidata",
+    kick_faq:"ČESTA PITANJA", faq_title:"FAQ",
+    faqItems:[
+      {q:"Koliko traje obuka?", a:"Trajanje zavisi od dinamike pohađanja teorijske nastave i praktične vožnje."},
+      {q:"Kada mogu da počnem?", a:"Upis je moguć tokom cele godine."},
+      {q:"Koja dokumenta su potrebna?", a:"Lična karta, lekarsko uverenje i ostala dokumentacija u skladu sa važećim propisima."},
+      {q:"Da li mogu da biram instruktora?", a:"U skladu sa raspoloživošću instruktora, trudimo se da izađemo u susret željama kandidata."},
+      {q:"Da li je moguće plaćanje na rate?", a:"Da, nudimo mogućnost plaćanja obuke na više rata. Detalje dogovaramo prilikom upisa."},
+      {q:"Koliko časova vožnje je uključeno?", a:"Broj časova propisan je zakonom, a po potrebi je moguće dodatne časove doplatiti."},
+      {q:"Gde se održava teorijska nastava?", a:"Teorijska nastava se održava u našoj učionici u Temerinu, u terminima prilagođenim polaznicima."},
+      {q:"Da li polažete u Temerinu?", a:"Polaganje se organizuje u skladu sa rasporedom nadležnog tela; sve informacije dobijate blagovremeno."}
+    ],
+    reviews:[
+      {quote:"Položila iz prve! Instruktori su bili strpljivi i uvek dostupni za svako pitanje.", name:"Jelena M.", cat:"B kategorija", initial:"J"},
+      {quote:"Najbolja odluka. Opušteni časovi, sjajna atmosfera i jasan plan obuke.", name:"Stefan R.", cat:"B kategorija", initial:"S"},
+      {quote:"Profesionalno od upisa do ispita. Sve preporuke za ceo tim!", name:"Milica T.", cat:"A kategorija", initial:"M"}
+    ],
+    journey:[
+      {title:"Upis", text:"Prijava i papirologija u kancelariji."},
+      {title:"Lekarski", text:"Lekarski pregled za vozače."},
+      {title:"Teorija", text:"Predavanja iz saobraćajnih propisa."},
+      {title:"Teorijski ispit", text:"Polaganje testa iz teorije."},
+      {title:"Vožnja", text:"Praktični časovi sa instruktorom."},
+      {title:"Praktični ispit", text:"Ispit vožnje pred komisijom."},
+      {title:"Dozvola", text:"Vozačka dozvola je tvoja!"}
+    ],
+    cats:[
+      {code:"A", name:"Motocikli", desc:"Sve potkategorije, od AM do A.", price:"65.000 RSD"},
+      {code:"B", name:"Putnički auto", desc:"Najtraženija kategorija.", price:"95.000 RSD"},
+      {code:"C", name:"Kamioni", desc:"Teretna vozila preko 3.5t.", price:"90.000 RSD"},
+      {code:"BE", name:"Prikolica", desc:"Vožnja putničkog vozila sa prikolicom.", price:"35.000 RSD"}
+    ],
+    about:["Savremena i redovno servisirana vozila","Fleksibilni termini, i vikendom","Teorija online ili u učionici","Pomoć oko lekarskog i dokumentacije"],
+    steps:[
+      {title:"Prijava", text:"Dođi u kancelariju ili se javi telefonom. Sredimo papirologiju za par minuta."},
+      {title:"Obuka", text:"Teorija pa praktični časovi u tempu koji tebi odgovara, sa stalnim instruktorom."},
+      {title:"Ispit", text:"Izlaziš spreman i samouveren. Ostajemo uz tebe do same dozvole."}
+    ],
+    instructors:[
+      {role:"Instruktor B kategorije", exp:"14 godina iskustva"},
+      {role:"Instruktor A i B kategorije", exp:"9 godina iskustva"},
+      {role:"Instruktor C kategorije", exp:"18 godina iskustva"},
+      {role:"Instruktor B kategorije", exp:"7 godina iskustva"},
+      {role:"Predavač teorije", exp:"Licencirani ispitivač"}
+    ],
+    contact:[
+      {label:"ADRESA", value:"Novosadska 252, Temerin"},
+      {label:"TELEFON", value:"021 555 252 · 062-151-00-28"},
+      {label:"EMAIL", value:"motion@gmail.com"},
+      {label:"RADNO VREME", value:"Pon–Pet 08–19 · Sub 09–13"}
+    ]
+  },
+  en: {
+    nav_about:"About", nav_categories:"Categories", nav_enroll:"Enroll", nav_instructors:"Instructors", nav_gallery:"Gallery", nav_contact:"Contact", nav_why:"Why us",
+    hero_title:"Your driving licence — calmly, no rush.",
+    hero_sub:"Experienced instructors, modern vehicles and a clear training plan in the heart of Temerin. Drive relaxed — we guide every step.",
+    hero_cta1:"Apply to enroll", hero_cta2:"See pricing",
+    stat1:"years of experience", stat2:"drivers passed", stat3:"pass rate",
+    kick_categories:"CATEGORIES & PRICES", categories_title:"Choose your category",
+    categories_note:"Complete theory and practical training. Schedule adapted to your routine.",
+    popular_badge:"Most people choose this",
+    float_title:"Ready to enroll? Call us!",
+    price_from:"from", price_disclaimer:"* Prices are indicative and will be updated. Contact us for an exact quote and installment options.",
+    kick_about:"ABOUT US", about_title:"Trusted by Temerin for 18 years",
+    about_p1:"Motion Driving School has operated in Temerin since 2008. More than 3,500 drivers have trained with us and now drive safely on the road.",
+    about_p2:"We believe good drivers are built through calm, patient training — no pressure, full support from the first lesson to the last.",
+    kick_enroll:"HOW TO ENROLL", enroll_title:"Three steps to your licence", enroll_cta:"Book a free consultation",
+    kick_instructors:"OUR TEAM", instructors_title:"Instructors who make you confident",
+    kick_gallery:"GALLERY", gallery_title:"Our school and fleet",
+    kick_why:"WHY US", why_title:"Why choose us",
+    whyItems:[
+      {icon:"🚗", title:"Modern vehicles", text:"New, regularly serviced vehicles with full equipment for safe and comfortable training."},
+      {icon:"👨‍🏫", title:"Experienced instructors", text:"Our licensed instructors have years of experience and an individual approach to every candidate."},
+      {icon:"📅", title:"Flexible scheduling", text:"You can book lessons around your own commitments."},
+      {icon:"🏆", title:"High pass rate", text:"A large share of our candidates pass the exam successfully on the first attempt."}
+    ],
+    kick_contact:"CONTACT", contact_title:"Get in touch — start this week",
+    contact_sub:"Fill in the form or call us — we reply fast and gladly explain enrollment and pricing.",
+    form_name:"Full name", form_name_ph:"Your name", form_phone:"Phone", form_category:"Category",
+    form_message:"Message", form_message_ph:"When would you like to start?", form_submit:"Send application",
+    footer_copy:"© 2026 Motion Driving School, Temerin. All rights reserved.",
+    nav_journey:"The journey", kick_journey:"STEP BY STEP", journey_title:"Your road to the licence",
+    kick_reviews:"CANDIDATE REVIEWS", reviews_title:"What our students say", reviews_cta:"Candidate reviews",
+    kick_faq:"FREQUENT QUESTIONS", faq_title:"FAQ",
+    faqItems:[
+      {q:"How long does the training take?", a:"The duration depends on the pace of theory classes and practical driving lessons."},
+      {q:"When can I start?", a:"Enrollment is open throughout the year."},
+      {q:"Which documents are required?", a:"ID card, medical certificate and other documentation in line with applicable regulations."},
+      {q:"Can I choose my instructor?", a:"Subject to instructor availability, we do our best to accommodate candidates' wishes."},
+      {q:"Is installment payment possible?", a:"Yes, we offer the option to pay for training in several installments. We arrange the details at enrollment."},
+      {q:"How many driving lessons are included?", a:"The number of lessons is set by law, and additional lessons can be paid for if needed."},
+      {q:"Where are the theory classes held?", a:"Theory classes are held in our classroom in Temerin, at times adapted to students."},
+      {q:"Do you hold exams in Temerin?", a:"Exams are organized according to the schedule of the competent authority; you receive all information in a timely manner."}
+    ],
+    reviews:[
+      {quote:"Passed on my first try! The instructors were patient and always available for any question.", name:"Jelena M.", cat:"Category B", initial:"J"},
+      {quote:"Best decision. Relaxed lessons, a great atmosphere and a clear training plan.", name:"Stefan R.", cat:"Category B", initial:"S"},
+      {quote:"Professional from enrollment to exam. Highly recommend the whole team!", name:"Milica T.", cat:"Category A", initial:"M"}
+    ],
+    journey:[
+      {title:"Enrollment", text:"Application and paperwork at the office."},
+      {title:"Medical", text:"Medical exam for drivers."},
+      {title:"Theory", text:"Traffic-rules lectures."},
+      {title:"Theory exam", text:"Passing the theory test."},
+      {title:"Driving", text:"Practical lessons with an instructor."},
+      {title:"Practical exam", text:"Driving test before the board."},
+      {title:"Licence", text:"Your driving licence is yours!"}
+    ],
+    cats:[
+      {code:"A", name:"Motorcycles", desc:"All subcategories, from AM to A.", price:"65,000 RSD"},
+      {code:"B", name:"Passenger car", desc:"Our most popular category.", price:"95,000 RSD"},
+      {code:"C", name:"Trucks", desc:"Cargo vehicles over 3.5t.", price:"90,000 RSD"},
+      {code:"BE", name:"Trailer", desc:"Driving a car with a trailer.", price:"35,000 RSD"}
+    ],
+    about:["Modern, regularly serviced vehicles","Flexible slots, weekends too","Theory online or in the classroom","Help with medical exam & paperwork"],
+    steps:[
+      {title:"Apply", text:"Visit the office or call us. We handle the paperwork in minutes."},
+      {title:"Training", text:"Theory then practical lessons at your own pace, with a dedicated instructor."},
+      {title:"Exam", text:"You go in ready and confident. We stay with you right up to the licence."}
+    ],
+    instructors:[
+      {role:"Category B instructor", exp:"14 years experience"},
+      {role:"Category A & B instructor", exp:"9 years experience"},
+      {role:"Category C instructor", exp:"18 years experience"},
+      {role:"Category B instructor", exp:"7 years experience"},
+      {role:"Theory lecturer", exp:"Licensed examiner"}
+    ],
+    contact:[
+      {label:"ADDRESS", value:"Novosadska 252, Temerin"},
+      {label:"PHONE", value:"021 555 252 · 062-151-00-28"},
+      {label:"EMAIL", value:"motion@gmail.com"},
+      {label:"OPENING HOURS", value:"Mon–Fri 08–19 · Sat 09–13"}
+    ]
+  }
+};
+const NAMES = ["Marko Petrović","Ana Jovanović","Nikola Đurić","Ivana Simić","Dušan Kovačević"];
+const IMAGES = ["uploads/i1.png","uploads/i2.png","uploads/i3.png","uploads/i4.png","uploads/i5.png"];
+class Component extends DCLogic {
+  state = { lang: "sr", n1: 0, n2: 0, n3: 0, openFaq: 0, mapOpen: false, slide: 0, menuOpen: false, floatShow: true };
+  componentDidMount() {
+    const targets = { n1: 18, n2: 9500, n3: 96 };
+    const dur = 1600, start = performance.now();
+    const tick = (now) => {
+      const p = Math.min(1, (now - start) / dur);
+      const e = 1 - Math.pow(1 - p, 3);
+      this.setState({
+        n1: Math.round(targets.n1 * e),
+        n2: Math.round(targets.n2 * e),
+        n3: Math.round(targets.n3 * e)
+      });
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    this._galleryTimer = setInterval(() => {
+      this.setState(s => ({ slide: (s.slide + 1) % 7 }));
+    }, 3000);
+    this.setupReveal();
+  }
+  setupReveal() {
+    const root = this._root;
+    if (!root || this._revealDone) return;
+    this._revealDone = true;
+    const kids = Array.from(root.children).filter(el => !(el.style && el.style.position === "sticky"));
+    kids.forEach((el, i) => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(34px)";
+      el.style.transition = "opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1)";
+    });
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    kids.forEach(el => io.observe(el));
+    this._revealIO = io;
+  }
+  componentWillUnmount() {
+    if (this._galleryTimer) clearInterval(this._galleryTimer);
+    if (this._revealIO) this._revealIO.disconnect();
+  }
+  renderVals() {
+    const lang = this.state.lang;
+    const d = DICT[lang];
+    const chip = "display:inline-block;padding:6px 14px;line-height:1;cursor:pointer;transition:.2s";
+    const activeChip = chip + ";background:#ee6a1f;color:#14130f;font-weight:700";
+    const idleChip = chip + ";color:#cfc9bb";
+    const catBase = "position:relative;padding:26px 22px;border-radius:14px;cursor:pointer;transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease,background .28s ease;";
+    const cats = d.cats.map((c,i)=>({
+      ...c,
+      price:c.price,
+      popular: i===1,
+      cardStyle: catBase + (i===1
+        ? "border:1px solid rgba(238,106,31,.5);background:rgba(238,106,31,.06)"
+        : "border:1px solid rgba(242,239,230,.1)")
+    }));
+    const steps = d.steps.map((s,i)=>({ ...s, n:"0"+(i+1) }));
+    const imgBase = "width:100%;height:100%;object-fit:cover;object-position:center top;";
+    const instructors = d.instructors.map((x,i)=>({
+      ...x, name:NAMES[i], img:IMAGES[i],
+      imgStyle: imgBase + ((i===2||i===4) ? "transform:scale(1.06);transform-origin:center top" : "")
+    }));
+    const galLabels = lang==="sr"
+      ? ["vozilo","učionica","instruktor","poligon","kancelarija","tabla","ispit","tim"]
+      : ["vehicle","classroom","instructor","range","office","board","exam","team"];
+    const gallery = galLabels.map((l,i)=>({
+      label:"[ "+l+" ]",
+      style:"position:relative;display:flex;align-items:center;justify-content:center;border-radius:12px;background:repeating-linear-gradient(45deg,rgba(238,106,31,.1) 0 12px,rgba(20,19,15,.4) 12px 24px);"
+        + (i===0||i===5 ? "grid-column:span 2;" : "")
+    }));
+    const circleBase = "width:58px;height:58px;border-radius:50%;background:#ee6a1f;color:#14130f;display:flex;align-items:center;justify-content:center;font-family:'Spectral',serif;font-size:24px;font-weight:700;position:relative;z-index:1;margin:0 auto;";    const journey = d.journey.map((j,i)=>({
+      ...j,
+      n: i+1,
+      circleStyle: circleBase + "animation:stepPulse 3.85s ease-in-out infinite;animation-delay:" + (i*0.5) + "s"
+    }));
+    const nfmt = (n) => n.toLocaleString("de-DE");
+    const baseStats = [
+      { value: this.state.n1 + "+", label: d.stat1 },
+      { value: nfmt(this.state.n2) + "+", label: d.stat2 },
+      { value: this.state.n3 + "%", label: d.stat3 }
+    ];
+    const marqueeItems = baseStats;
+    const galleryOrder = ["uploads/1.png","uploads/4.png","uploads/3.png","uploads/2.png","uploads/5.png","uploads/6.png","uploads/7.png"];
+    const active = this.state.slide;
+    const slides = galleryOrder.map((src,i)=>({
+      src,
+      go: () => this.setState({ slide: i }),
+      style: "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s ease;opacity:" + (i===active?"1":"0"),
+      dotStyle: "width:9px;height:9px;border-radius:50%;cursor:pointer;transition:background .3s ease,transform .3s ease;transform:scale(" + (i===active?"1.25":"1") + ");background:" + (i===active?"#ee6a1f":"rgba(242,239,230,.45)")
+    }));
+    const faq = d.faqItems.map((f,i)=>{
+      const open = this.state.openFaq === i;
+      return {
+        ...f,
+        toggle: () => this.setState(s=>({ openFaq: s.openFaq===i ? -1 : i })),
+        cardStyle: "padding:22px 26px;border:1px solid " + (open?"rgba(238,106,31,.5)":"rgba(242,239,230,.1)")
+          + ";border-radius:14px;cursor:pointer;transition:border-color .25s ease,background .25s ease;"
+          + (open?"background:rgba(238,106,31,.05)":""),
+        iconStyle: "font-family:'Spectral',serif;font-size:26px;color:#ee6a1f;line-height:1;flex-shrink:0;transition:transform .25s ease;transform:rotate(" + (open?"45deg":"0deg") + ")",
+        answerStyle: "overflow:hidden;transition:max-height .3s ease,opacity .25s ease;max-height:" + (open?"200px":"0") + ";opacity:" + (open?"1":"0")
+      };
+    });
+    return {
+      t: d,
+      journey,
+      marqueeItems,
+      faq,
+      slides,
+      why: d.whyItems,
+      mapOpen: this.state.mapOpen,
+      openMap: () => this.setState({ mapOpen: true }),
+      closeMap: () => this.setState({ mapOpen: false }),
+      floatShow: this.state.floatShow,
+      closeFloat: () => this.setState({ floatShow: false }),
+      rootRef: (el) => { this._root = el; },
+      menuState: this.state.menuOpen ? "open" : "closed",
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      ham1: "display:block;width:22px;height:2px;background:#f2efe6;border-radius:2px;transition:transform .25s ease,opacity .25s ease;transform-origin:center;" + (this.state.menuOpen ? "transform:translateY(7px) rotate(45deg)" : ""),
+      ham2: "display:block;width:22px;height:2px;background:#f2efe6;border-radius:2px;transition:opacity .25s ease;opacity:" + (this.state.menuOpen ? "0" : "1"),
+      ham3: "display:block;width:22px;height:2px;background:#f2efe6;border-radius:2px;transition:transform .25s ease,opacity .25s ease;transform-origin:center;" + (this.state.menuOpen ? "transform:translateY(-7px) rotate(-45deg)" : ""),
+      reviews: d.reviews,
+      categories: cats,
+      aboutPoints: d.about.map(text=>({text})),
+      steps,
+      instructors,
+      gallery,
+      contactInfo: d.contact,
+      srStyle: lang==="sr" ? activeChip : idleChip,
+      enStyle: lang==="en" ? activeChip : idleChip,
+      setSr: () => this.setState({ lang:"sr" }),
+      setEn: () => this.setState({ lang:"en" })
+    };
+  }
+}
+</script>
+</body>
+</html>
